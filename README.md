@@ -1,2 +1,2 @@
 # CountryTrivia
-Trivia game to guess country flags and capitals
+Trivia game to guess country capitals
