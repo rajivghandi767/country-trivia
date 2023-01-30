@@ -11,3 +11,10 @@ elif greet_prompt == 'No' or greet_prompt == 'N':
     print("Ok, Maybe next time!")
 else:
    print("Please answer 'Yes (Y)' or 'No (N)'")
+
+
+def guess_country():
+    input('What is the capital of ?')
+    
+def guess_city():
+    input(' is the capital of what country?')
