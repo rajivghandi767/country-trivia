@@ -1,5 +1,8 @@
 from tkinter import *
 from tkinter import ttk
+import sqlite3
+from sqlite3 import Error
+
 
 root = Tk()
 root.title("Country Trivia Game")
