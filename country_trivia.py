@@ -1,10 +1,12 @@
+from tkinter import *
+from tkinter import ttk
+
+root = Tk()
+root.title("Country Trivia Game")
 
 user = input('Name: ')
 user_country = input('Country: ')
 
-class country_trivia():
-    pass
-    
 def greet_prompt():
     greet_prompt = input("Hello " + user + ". Are you ready to play? ")
     greet_prompt.capitalize()
@@ -21,3 +23,5 @@ def guess_country():
     
 def guess_city():
     input(' is the capital of what country?')
+    
+root.mainloop()
