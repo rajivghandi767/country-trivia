@@ -1,21 +1,56 @@
 from tkinter import *
 from tkinter import ttk
+from PIL import ImageTk
 import sqlite3
 from sqlite3 import Error
+from numpy import random
 
-def calculate(*args):
+def start_page():
+    frame1.pack_propagate(False)
+    
+        # Logo
+    # logo = ImageTk.PhotoImage(file="")
+    # logo_widget = Label(frame_1, image=logo, bg="#000000")
+    # logo_widget.image = logo
+    # logo_widget.pack()
+
+    Label(frame1, text="Welcome to Country Trivia \n Press PLAY to begin!",
+        bg="#000000",
+        fg="white",
+        font=("TkMenuFont", 14)).pack()
+
+    Button(frame1, text="PLAY",
+        font=("TkMenuFont", 14),
+        bg="#FFFFFF",
+        fg="black",
+        cursor="hand2",
+        activebackground="#FFFFFF",
+        activeforeground="black",
+        command=lambda:greet_prompt).pack(pady=20)
+
+def fetch_sql_db (path):
+    connection = None
     try:
-        value = float(feet.get())
-        meters.set(int(0.3048 * value * 10000.0 + 0.5)/10000.0)
-    except ValueError:
-        pass
+        connection = sqlite3.connect(path)
+        print("Connection Successful")
+    except Error as e:
+        print(f"Error: {e} has occured")
+        
+    cursor=connection.cursor()
+    cursor.execute()
+    cursor.fetchall()
+    connection.close()
 
-# user = input('Name: ')
+root = Tk()
+root.title("Country Trivia Game")
+root.eval("tk::PlaceWindow . center")
+
+def greet_prompt():
+    user = input('Name: ')
+    greet_prompt = input("Hello " + user + ". Are you ready to play? ")
+    greet_prompt.capitalize()
+
 # user_country = input('Country: ')
-
-# def greet_prompt():
-#     greet_prompt = input("Hello " + user + ". Are you ready to play? ")
-#     greet_prompt.capitalize()
 
 #     if greet_prompt == 'Yes' or greet_prompt == 'Y':
 #         print("Ok, let's begin!")
@@ -30,31 +65,8 @@ def calculate(*args):
 # def guess_city():
 #     input(' is the capital of what country?')
 
-root = Tk()
-root.title("Country Trivia Game")
+frame1 = Frame(root, width=500, height=600, bg="#000000")
+frame1.grid(row=0, column=0)
 
-mainframe = ttk.Frame(root, padding="3 3 12 12")
-mainframe.grid(column=0, row=0, sticky=(N, W, E, S))
-root.columnconfigure(0, weight=1)
-root.rowconfigure(0, weight=1)
-
-feet = StringVar()
-feet_entry = ttk.Entry(mainframe, width=7, textvariable=feet)
-feet_entry.grid(column=2, row=1, sticky=(W, E))
-
-meters = StringVar()
-ttk.Label(mainframe, textvariable=meters).grid(column=2, row=2, sticky=(W, E))
-
-ttk.Button(mainframe, text="Calculate", command=calculate).grid(column=3, row=3, sticky=W)
-
-ttk.Label(mainframe, text="feet").grid(column=3, row=1, sticky=W)
-ttk.Label(mainframe, text="is equivalent to").grid(column=1, row=2, sticky=E)
-ttk.Label(mainframe, text="meters").grid(column=3, row=2, sticky=W)
-
-for child in mainframe.winfo_children(): 
-    child.grid_configure(padx=5, pady=5)
-
-feet_entry.focus()
-root.bind("<Return>", calculate)
-    
+start_page()
 root.mainloop()
