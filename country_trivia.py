@@ -14,10 +14,9 @@ def start_page():
     # logo_widget.image = logo
     # logo_widget.pack()
 
-    Label(frame1, text="Welcome to Country Trivia \n Press PLAY to begin!",
-        bg="#000000",
+    Label(frame1, text="Welcome to Country Trivia \n \n Press PLAY to begin!",
         fg="white",
-        font=("TkMenuFont", 14)).pack()
+        font=("TkMenuFont", 14)).pack(pady=20)
 
     Button(frame1, text="PLAY",
         font=("TkMenuFont", 14),
@@ -65,8 +64,11 @@ def greet_prompt():
 # def guess_city():
 #     input(' is the capital of what country?')
 
-frame1 = Frame(root, width=500, height=600, bg="#000000")
+frame1 = ttk.Frame(root, width=400, height=200)
 frame1.grid(row=0, column=0)
+
+root.columnconfigure(0, weight=1)
+root.rowconfigure(0, weight=1)
 
 start_page()
 root.mainloop()
