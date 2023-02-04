@@ -3,7 +3,25 @@ from tkinter import ttk
 from PIL import ImageTk
 import sqlite3
 from sqlite3 import Error
+import pandas as pd
 from numpy import random
+
+game_data = pd.read_csv("country_capitals.csv")
+game_data.columns = game_data.columns.str.strip()
+
+def fetch_sql_db (path):
+    connection = None
+    try:
+        connection = sqlite3.connect(path)
+        print("Connection Successful")
+    except Error as e:
+        print(f"Error: {e} has occured")
+    
+    game_data.to_sql("Country Data", connection, if_exists="replace")    
+    cursor=connection.cursor()
+    cursor.execute()
+    cursor.fetchall()
+    connection.close()
 
 def start_page():
     frame1.pack_propagate(False)
@@ -26,19 +44,6 @@ def start_page():
         activebackground="#FFFFFF",
         activeforeground="black",
         command=lambda:greet_prompt).pack(pady=20)
-
-def fetch_sql_db (path):
-    connection = None
-    try:
-        connection = sqlite3.connect(path)
-        print("Connection Successful")
-    except Error as e:
-        print(f"Error: {e} has occured")
-        
-    cursor=connection.cursor()
-    cursor.execute()
-    cursor.fetchall()
-    connection.close()
 
 root = Tk()
 root.title("Country Trivia Game")
@@ -70,5 +75,6 @@ frame1.grid(row=0, column=0)
 root.columnconfigure(0, weight=1)
 root.rowconfigure(0, weight=1)
 
+fetch_sql_db("country_capitals.db")
 start_page()
 root.mainloop()
