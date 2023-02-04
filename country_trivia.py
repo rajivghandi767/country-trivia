@@ -37,7 +37,7 @@ def start_page():
         cursor="hand2",
         activebackground="#FFFFFF",
         activeforeground="black",
-        command=lambda:greet_prompt).pack(pady=20) 
+        command=lambda:print("Play!")).pack(pady=20) 
 
 def info_page():
     pass
