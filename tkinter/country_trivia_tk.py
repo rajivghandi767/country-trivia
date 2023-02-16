@@ -6,7 +6,7 @@ from sqlite3 import Error
 import pandas as pd
 from numpy import random
 
-game_data = pd.read_csv("country_capitals.csv")
+game_data = pd.read_csv("data/country_capitals.csv")
 game_data.columns = game_data.columns.str.strip()
 
 def fetch_sql_db (path):
@@ -62,6 +62,6 @@ frame1.grid(row=0, column=0)
 root.columnconfigure(0, weight=1)
 root.rowconfigure(0, weight=1)
 
-fetch_sql_db("country_capitals.db")
+fetch_sql_db("data/country_capitals.db")
 start_page()
 root.mainloop()
