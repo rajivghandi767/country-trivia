@@ -9,7 +9,15 @@
 
 <body>
     <div class=container>
-        <input type="submit" value="Enter" id="play">
+        <form action="enter" method="post">
+            {% for message in get_flashed_messages()%}
+                <p>{{message}}</p>
+            {% endfor %}
+            <br>
+            <input type="text" name="player_answer" id="answer">
+            <br>
+            <input type="submit" value="Enter" id="enter">
+        </form>
     </div>   
 </body>
 

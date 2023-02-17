@@ -9,6 +9,11 @@ app.secret_key = "WPJxVU!w8CW$0Vzty&CM"
 def home():
     return render_template("index.html")
 
+# @app.route("/enter", methods=["POST", "GET"])
+def trivia_prompt():
+    flash ("Question Placeholder")
+
 @app.route("/trivia.html")
 def trivia():
+    trivia_prompt()
     return render_template("trivia.html")
