@@ -6,6 +6,9 @@ app.secret_key = "WPJxVU!w8CW$0Vzty&CM"
 
 
 @app.route("/")
-def index():
+def home():
     return render_template("index.html")
 
+@app.route("/trivia.html")
+def trivia():
+    return render_template("trivia.html")
