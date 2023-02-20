@@ -23,13 +23,13 @@ def trivia_prompt():
 @app.route("/trivia.html")
 def trivia():
     data = fetch_sql_db()
-    return str(data)
-    # trivia_prompt()
-    # return render_template("trivia.html")
+    # return str(data)
+    trivia_prompt()
+    return render_template("trivia.html", game_data=data)
 
 
-game_data = pd.read_csv("static/data/country_capitals.csv")
-game_data.columns = game_data.columns.str.strip()
+csv_data = pd.read_csv("static/data/country_capitals.csv")
+csv_data.columns = csv_data.columns.str.strip()
 
 def fetch_sql_db ():
     connection = getattr(g, '_database', None)
@@ -39,10 +39,15 @@ def fetch_sql_db ():
     except Error as e:
         print(f"Error: {e} has occured")
     
-    game_data.to_sql("game_data", connection, if_exists="replace")
+    csv_data.to_sql("game_data", connection, if_exists="replace")
     cursor=connection.cursor()
-    cursor.execute("select * from game_data")
-    return cursor.fetchall()
+    cursor.execute("select country,capital from game_data")
+    game_data = cursor.fetchall()
+    game_data = [str(val) for val in game_data]
+    
+    random.shuffle(game_data)
+    
+    return game_data
     
 @app.teardown_appcontext
 def close_connection(exception):
