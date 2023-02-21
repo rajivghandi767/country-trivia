@@ -32,16 +32,15 @@ def fetch_sql_db ():
     cursor=connection.cursor()
     cursor.execute("select country,capital from game_data")
     game_data = cursor.fetchall()
-    # game_data = [str(val) for val in game_data]
     
     random.shuffle(game_data)
     final_game_data = dict(game_data)
     
     return final_game_data
 
-def trivia_prompt(capitals):
-    for i in capitals:
-        flash (f"What is the Capital City of: {i}")
+def trivia_prompt(countries):
+    for country in countries:
+        flash (f"What is the Capital City of: {country}")
         return 
 
 #Game Page w/ Trivia Question
@@ -49,21 +48,23 @@ def trivia_prompt(capitals):
 @app.route("/trivia.html")
 def trivia():
     data = fetch_sql_db()
-    # return str(data)
     trivia_prompt(data)
-    return render_template("trivia.html", final_game_data=data)
+    return render_template("trivia.html")
 
 #Answer Check
-  
-#   def result_check(answer):
-#       for x,y in country_capital_pair:
-#           while prompt == x:
-#               if answer == y:
-#                   return ("Correct!")
-#               else:
-#                   return ("Incorrect, Try Again!")
-      
-    
+
+# @app.route("/user_response", methods=["POST","GET"])
+# def result_check():
+#     data = fetch_sql_db()
+#     result = data.keys()
+#     for x in result:
+#         while trivia_prompt(data).keys() == x:
+#             if request.form["player_answer"] == y:
+#                 return ("Correct!")
+#             else:
+#                 return ("Incorrect, Try Again!")
+#     return render_template("trivia.html")
+   
 @app.teardown_appcontext
 def close_connection(exception):
     connection = getattr(g, '_database', None)

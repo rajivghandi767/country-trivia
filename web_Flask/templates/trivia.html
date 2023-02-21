@@ -11,13 +11,13 @@
     <div class=container>
         <div class=prompt>
             {% for message in get_flashed_messages()%}
-        <p>{{message}}</p>
-        {% endfor %}
+            <p>{{message}}</p>
+            {% endfor %}
         </div>
-        <form action="enter" method="get">
-            <input type="text" name="player_answer" id="answer">
+        <form action="user_response" method="post">
+            <input type="text" name="player_answer" id="answer_box">
             <br>
-            <input type="submit" value="Enter" id="enter">
+            <input type="submit" value="Check Answer" id="enter">
         </form>
     </div>   
 </body>

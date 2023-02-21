@@ -48,7 +48,7 @@ input {
     border-radius: 25px;
 }
 
-#answer {
+#answer_box {
     width: 150px;
     height: 25px;
     margin: auto;
