@@ -15,18 +15,7 @@ app.secret_key = "WPJxVU!w8CW$0Vzty&CM"
 def home():
     return render_template("index.html")
 
-#Game Page w/ Trivia Prompts
-
-def trivia_prompt():
-    flash ("What is the Capital City of: ")
-
-@app.route("/trivia.html")
-def trivia():
-    data = fetch_sql_db()
-    # return str(data)
-    trivia_prompt()
-    return render_template("trivia.html", final_game_data=data)
-
+#Trivia Database & Prompts
 
 csv_data = pd.read_csv("static/data/country_capitals.csv")
 csv_data.columns = csv_data.columns.str.strip()
@@ -49,6 +38,22 @@ def fetch_sql_db ():
     final_game_data = dict(game_data)
     
     return final_game_data
+
+def trivia_prompt(capitals):
+    for i in capitals:
+        flash (f"What is the Capital City of: {i}")
+        return 
+
+#Game Page w/ Trivia Question
+
+@app.route("/trivia.html")
+def trivia():
+    data = fetch_sql_db()
+    # return str(data)
+    trivia_prompt(data)
+    return render_template("trivia.html", final_game_data=data)
+
+#Answer Check
   
 #   def result_check(answer):
 #       for x,y in country_capital_pair:

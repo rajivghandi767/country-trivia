@@ -13,9 +13,8 @@
             {% for message in get_flashed_messages()%}
         <p>{{message}}</p>
         {% endfor %}
-            <p>{{ final_game_data }}</p>
         </div>
-        <form action="enter" method="post">
+        <form action="enter" method="get">
             <input type="text" name="player_answer" id="answer">
             <br>
             <input type="submit" value="Enter" id="enter">
