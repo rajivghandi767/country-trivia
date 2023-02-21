@@ -25,7 +25,7 @@ def trivia():
     data = fetch_sql_db()
     # return str(data)
     trivia_prompt()
-    return render_template("trivia.html", game_data=data)
+    return render_template("trivia.html", final_game_data=data)
 
 
 csv_data = pd.read_csv("static/data/country_capitals.csv")
@@ -43,11 +43,21 @@ def fetch_sql_db ():
     cursor=connection.cursor()
     cursor.execute("select country,capital from game_data")
     game_data = cursor.fetchall()
-    game_data = [str(val) for val in game_data]
+    # game_data = [str(val) for val in game_data]
     
     random.shuffle(game_data)
+    final_game_data = dict(game_data)
     
-    return game_data
+    return final_game_data
+  
+#   def result_check(answer):
+#       for x,y in country_capital_pair:
+#           while prompt == x:
+#               if answer == y:
+#                   return ("Correct!")
+#               else:
+#                   return ("Incorrect, Try Again!")
+      
     
 @app.teardown_appcontext
 def close_connection(exception):

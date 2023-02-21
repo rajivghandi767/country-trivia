@@ -8,16 +8,13 @@
 </head>
 
 <body>
-    {% for message in get_flashed_messages()%}
-        <p>{{message}}</p>
-    {% endfor %}
-    <br>
-    {% for item in game_data%}
-        <p>{{ item }}</p>
-    {% endfor %}
-    <br>
-
     <div class=container>
+        <div class=prompt>
+            {% for message in get_flashed_messages()%}
+        <p>{{message}}</p>
+        {% endfor %}
+            <p>{{ final_game_data }}</p>
+        </div>
         <form action="enter" method="post">
             <input type="text" name="player_answer" id="answer">
             <br>
