@@ -53,18 +53,19 @@ def trivia():
 
 #Answer Check
 
-# @app.route("/user_response", methods=["POST","GET"])
-# def result_check():
-#     data = fetch_sql_db()
-#     result = data.keys()
-#     for x in result:
-#         while trivia_prompt(data).keys() == x:
-#             if request.form["player_answer"] == y:
-#                 return ("Correct!")
-#             else:
-#                 return ("Incorrect, Try Again!")
-#     return render_template("trivia.html")
-   
+@app.route("/user_response", methods=["POST","GET"])
+def result_check():
+    data = fetch_sql_db()
+    for x,y in data.items():
+        # while trivia_prompt(fetch_sql_db ()) == x:
+            if trivia_prompt(data) == x and request.form["player_answer"] == y:
+                print("Correct!")
+                return render_template("trivia.html") 
+            else:
+                print("Incorrect, Try Again!")
+                return render_template("trivia.html")
+    # return render_template("trivia.html")
+    
 @app.teardown_appcontext
 def close_connection(exception):
     connection = getattr(g, '_database', None)
