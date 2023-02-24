@@ -49,7 +49,6 @@ def trivia_prompt(countries):
 
 @app.route("/trivia.html")
 def trivia():
-    # data = fetch_sql_db()
     trivia_prompt(country_capitals)
     return render_template("trivia.html")
 
@@ -57,9 +56,8 @@ def trivia():
 
 @app.route("/user_response", methods=["POST","GET"])
 def result_check():
-    # data = fetch_sql_db()
     for x,y in country_capitals.items():
-        # while trivia_prompt(fetch_sql_db ()) == x:
+        # while trivia_prompt(country_capitals ()) == x:
             if trivia_prompt(country_capitals) == x and request.form["player_answer"] == y:
                 print("Correct!")
                 return render_template("trivia.html") 
