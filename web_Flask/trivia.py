@@ -8,35 +8,37 @@ from flask import Flask,render_template, request, flash, g
 app = Flask(__name__)
 app.secret_key = "WPJxVU!w8CW$0Vzty&CM"
 
-
-#Landing Page w/ Play Button
-
-@app.route("/")
-def home():
-    return render_template("index.html")
-
 #Trivia Database & Prompts
 
 csv_data = pd.read_csv("static/data/country_capitals.csv")
 csv_data.columns = csv_data.columns.str.strip()
 
 def fetch_sql_db ():
-    connection = getattr(g, '_database', None)
-    try:
-        connection = g.database = sqlite3.connect("static/data/country_capitals.db")
-        print("Connection to DB Successful")
-    except Error as e:
-        print(f"Error: {e} has occured")
-    
-    csv_data.to_sql("game_data", connection, if_exists="replace")
-    cursor=connection.cursor()
-    cursor.execute("select country,capital from game_data")
-    game_data = cursor.fetchall()
-    
-    random.shuffle(game_data)
-    final_game_data = dict(game_data)
-    
-    return final_game_data
+    with app.app_context():
+        connection = getattr(g, '_database', None)
+        try:
+            connection = g.database = sqlite3.connect("static/data/country_capitals.db")
+            print("Connection to DB Successful")
+        except Error as e:
+            print(f"Error: {e} has occured")
+        
+        csv_data.to_sql("game_data", connection, if_exists="replace")
+        cursor=connection.cursor()
+        cursor.execute("select country,capital from game_data")
+        game_data = cursor.fetchall()
+        
+        random.shuffle(game_data)
+        final_game_data = dict(game_data)
+        
+        return final_game_data
+
+country_capitals = fetch_sql_db()
+
+#Landing Page w/ Play Button
+
+@app.route("/")
+def home():
+    return render_template("index.html")
 
 def trivia_prompt(countries):
     for country in countries:
@@ -47,18 +49,18 @@ def trivia_prompt(countries):
 
 @app.route("/trivia.html")
 def trivia():
-    data = fetch_sql_db()
-    trivia_prompt(data)
+    # data = fetch_sql_db()
+    trivia_prompt(country_capitals)
     return render_template("trivia.html")
 
 #Answer Check
 
 @app.route("/user_response", methods=["POST","GET"])
 def result_check():
-    data = fetch_sql_db()
-    for x,y in data.items():
+    # data = fetch_sql_db()
+    for x,y in country_capitals.items():
         # while trivia_prompt(fetch_sql_db ()) == x:
-            if trivia_prompt(data) == x and request.form["player_answer"] == y:
+            if trivia_prompt(country_capitals) == x and request.form["player_answer"] == y:
                 print("Correct!")
                 return render_template("trivia.html") 
             else:
