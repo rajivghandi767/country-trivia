@@ -32,7 +32,7 @@ def fetch_sql_db ():
         
         return final_game_data
 
-country_capitals = fetch_sql_db()
+# country_capitals = fetch_sql_db()
 
 #Landing Page w/ Play Button
 
@@ -40,31 +40,17 @@ country_capitals = fetch_sql_db()
 def home():
     return render_template("index.html")
 
-def trivia_prompt(countries):
-    for country in countries:
-        flash (f"What is the Capital City of: {country}")
-        return 
-
 #Game Page w/ Trivia Question
 
 @app.route("/trivia.html")
 def trivia():
-    trivia_prompt(country_capitals)
-    return render_template("trivia.html")
+    data = fetch_sql_db()
+    prompt = (f"What is the Capital City of: {list(data.keys())[0]}")
+    return render_template("trivia.html", prompt = prompt)
 
 #Answer Check
 
-@app.route("/user_response", methods=["POST","GET"])
-def result_check():
-    for x,y in country_capitals.items():
-        # while trivia_prompt(country_capitals ()) == x:
-            if trivia_prompt(country_capitals) == x and request.form["player_answer"] == y:
-                print("Correct!")
-                return render_template("trivia.html") 
-            else:
-                print("Incorrect, Try Again!")
-                return render_template("trivia.html")
-    # return render_template("trivia.html")
+
     
 @app.teardown_appcontext
 def close_connection(exception):

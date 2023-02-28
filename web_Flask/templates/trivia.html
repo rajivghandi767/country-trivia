@@ -10,9 +10,7 @@
 <body>
     <div class=container>
         <div class=prompt>
-            {% for message in get_flashed_messages()%}
-            <p>{{message}}</p>
-            {% endfor %}
+            <p>{{prompt}}</p>
         </div>
         <form action="user_response" method="post">
             <input type="text" name="player_answer" id="answer_box">
