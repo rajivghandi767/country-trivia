@@ -8,7 +8,7 @@ from flask import Flask,render_template, request, flash, g
 app = Flask(__name__)
 app.secret_key = "WPJxVU!w8CW$0Vzty&CM"
 
-#Trivia Database & Prompts
+#DB Connection Open
 
 csv_data = pd.read_csv("static/data/country_capitals.csv")
 csv_data.columns = csv_data.columns.str.strip()
@@ -51,7 +51,9 @@ def trivia():
 #Answer Check
 
 
-    
+
+#Close DB
+   
 @app.teardown_appcontext
 def close_connection(exception):
     connection = getattr(g, '_database', None)
