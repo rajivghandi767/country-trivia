@@ -14,7 +14,7 @@ div.container {
 }
 
 div.prompt {
-    margin: 10px;
+    margin: 25px;
     color: white;
 
 }
@@ -26,33 +26,4 @@ img {
 h1 {
     color: white;
 
-}
-
-button {
-    width: 100px;
-    height: 25px;
-    margin: 5px;
-    border: none;
-    border-radius: 25px;
-    font-size: 1em;
-}
-
-form {
-    color: white;
-}
-
-input {
-    width: 100px;
-    height: 25px;
-    margin: 25px;
-    border: none;
-    border-radius: 25px;
-}
-
-#answer_box {
-    width: 150px;
-    height: 25px;
-    margin: auto;
-    border: none;
-    border-radius: 5px;
 }

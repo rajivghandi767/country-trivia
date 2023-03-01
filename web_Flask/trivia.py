@@ -3,7 +3,9 @@ from sqlite3 import Error
 import pandas as pd
 import random
 from flask import Flask,render_template, request, flash, g
-
+from flask_wtf import FlaskForm
+from wtforms import StringField, SubmitField
+from wtforms.validators import DataRequired
 
 app = Flask(__name__)
 app.secret_key = "WPJxVU!w8CW$0Vzty&CM"
@@ -32,21 +34,27 @@ def fetch_sql_db ():
         
         return final_game_data
 
-# country_capitals = fetch_sql_db()
-
 #Landing Page w/ Play Button
 
 @app.route("/")
 def home():
     return render_template("index.html")
 
+#Answer Form
+
+class AnswerForm(FlaskForm):
+    answer = StringField(validators=[DataRequired()])
+    check_answer = SubmitField("Check Answer")
+
 #Game Page w/ Trivia Question
 
-@app.route("/trivia.html")
+@app.route("/trivia.html", methods=["GET","POST"])
 def trivia():
     data = fetch_sql_db()
+    form = AnswerForm()
     prompt = (f"What is the Capital City of: {list(data.keys())[0]}")
-    return render_template("trivia.html", prompt = prompt)
+    
+    return render_template("trivia.html", prompt = prompt, form=AnswerForm())
 
 #Answer Check
 
