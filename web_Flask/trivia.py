@@ -51,10 +51,16 @@ class AnswerForm(FlaskForm):
 @app.route("/trivia.html", methods=["GET","POST"])
 def trivia():
     data = fetch_sql_db()
+    country = list(data.keys())[0]
+    capital = list(data.values())[0]
     form = AnswerForm()
-    prompt = (f"What is the Capital City of: {list(data.keys())[0]}")
+    prompt = (f"What is the Capital City of: {country}")
     
-    return render_template("trivia.html", prompt = prompt, form=AnswerForm())
+    if form.is_submitted():
+        result = list(request.form.values())[0]
+        return result
+        
+    return render_template("trivia.html", prompt = prompt, form=form)
 
 #Answer Check
 
@@ -66,6 +72,6 @@ def trivia():
 def close_connection(exception):
     connection = getattr(g, '_database', None)
     if connection is not None:
-        connection.close()  
+        connection.close()
     
 if __name__ == '__main__': trivia.run()
