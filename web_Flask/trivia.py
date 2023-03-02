@@ -29,7 +29,7 @@ def fetch_sql_db ():
         cursor.execute("select country,capital from game_data")
         game_data = cursor.fetchall()
         
-        random.shuffle(game_data)
+        # random.shuffle(game_data)
         final_game_data = dict(game_data)
         
         return final_game_data
@@ -45,21 +45,29 @@ def home():
 class AnswerForm(FlaskForm):
     answer = StringField(validators=[DataRequired()])
     check_answer = SubmitField("Check Answer")
+    next_question = SubmitField("Next")
+    
 
 #Game Page w/ Trivia Question
 
 @app.route("/trivia.html", methods=["GET","POST"])
 def trivia():
     data = fetch_sql_db()
-    country = list(data.keys())[0]
-    capital = list(data.values())[0]
+    country = list(data.keys())
+    # random.shuffle(country)
     form = AnswerForm()
-    prompt = (f"What is the Capital City of: {country}")
+    prompt = (f"What is the Capital City of: {country[0]}")
     
     if form.is_submitted():
         result = list(request.form.values())[0]
-        return result
-        
+        for k,v in data.items():
+            if country[0]== k and result == v:
+                flash ("Correct!")
+                break
+            else:
+                flash ("Incorrect, Try Again")
+                break
+    
     return render_template("trivia.html", prompt = prompt, form=form)
 
 #Answer Check

@@ -12,10 +12,19 @@
         <div class=prompt>
             <p>{{prompt}}</p>
         </div>
-        <form method="POST">
+        <form action= question method="POST">
             <p>{{form.answer}}</p>
             <p>{{form.check_answer}}</p>
+                <form action= next method="POST">
+                    {{form.next_question}}</p>
+                </form>
         </form>
+        <div class=result>
+            <p>{% for message in get_flashed_messages()%}
+                {{message}}
+                {%endfor%}
+            </p>
+        </div>
     </div>   
 </body>
 
