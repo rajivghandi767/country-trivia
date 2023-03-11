@@ -29,10 +29,7 @@ def fetch_sql_db ():
         cursor.execute("select country,capital from game_data")
         game_data = cursor.fetchall()
         
-        # random.shuffle(game_data)
-        final_game_data = dict(game_data)
-        
-        return final_game_data
+        return game_data
 
 #Landing Page w/ Play Button
 
@@ -45,34 +42,27 @@ def home():
 class AnswerForm(FlaskForm):
     answer = StringField(validators=[DataRequired()])
     check_answer = SubmitField("Check Answer")
-    next_question = SubmitField("Next")
-    
 
 #Game Page w/ Trivia Question
 
 @app.route("/trivia.html", methods=["GET","POST"])
 def trivia():
     data = fetch_sql_db()
-    country = list(data.keys())
-    # random.shuffle(country)
+    shuffled_data = random.sample(data, len(data))
     form = AnswerForm()
-    prompt = (f"What is the Capital City of: {country[0]}")
+    prompt = (f"What is the Capital City of: {shuffled_data[0][0]}")
+    
+    #Answer Check
     
     if form.is_submitted():
-        result = list(request.form.values())[0]
-        for k,v in data.items():
-            if country[0]== k and result == v:
-                flash ("Correct!")
-                break
-            else:
-                flash ("Incorrect, Try Again")
-                break
+        result = request.form.values()
+        print (result)
+        if result == shuffled_data[0][1]:
+            flash ("Correct!")
+        else:
+            flash ("Incorrect, Try Again")
     
     return render_template("trivia.html", prompt = prompt, form=form)
-
-#Answer Check
-
-
 
 #Close DB
    
@@ -82,4 +72,5 @@ def close_connection(exception):
     if connection is not None:
         connection.close()
     
-if __name__ == '__main__': trivia.run()
+if __name__ == '__main__': 
+    trivia.run()
