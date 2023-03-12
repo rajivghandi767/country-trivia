@@ -17,6 +17,4 @@ for i in numbers:
     else:
         crackle_pop.append(str(i))
 
-print (numbers)
-
 print (crackle_pop)
