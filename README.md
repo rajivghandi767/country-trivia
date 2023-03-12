@@ -1,4 +1,4 @@
-# CountryTrivia
+# Country Trivia
 
 Trivia game to guess country capitals. Project is being developed as:
 
