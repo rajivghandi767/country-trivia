@@ -12,9 +12,11 @@
         <div class=prompt>
             <p>{{prompt}}</p>
         </div>
-        <form action=check method="POST">
+        <form method="POST">
             <p>{{form.answer}}</p>
             <p>{{form.check_answer}}</p>
+            <div class=result>
+        </div>
         </form>
         <div class=result>
             <p>{% for message in get_flashed_messages()%}

@@ -56,12 +56,14 @@ def trivia():
     
     if form.is_submitted():
         result = request.form.values()
-        print (result)
-        if result == shuffled_data[0][1]:
-            flash ("Correct!")
-        else:
-            flash ("Incorrect, Try Again")
-    
+        for country in shuffled_data:
+            if result == shuffled_data[0][1]:
+                flash ("Correct!")
+                break
+            else:
+                flash ("Incorrect, Try Again!")
+                break
+        
     return render_template("trivia.html", prompt = prompt, form=form)
 
 #Close DB
