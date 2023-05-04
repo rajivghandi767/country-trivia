@@ -27,9 +27,12 @@ def fetch_sql_db ():
         csv_data.to_sql("game_data", connection, if_exists="replace")
         cursor=connection.cursor()
         cursor.execute("select country,capital from game_data")
-        game_data = cursor.fetchall()
+        country_city_pair = cursor.fetchall()
         
-        return game_data
+        return country_city_pair
+    
+game_data = fetch_sql_db()
+shuffled_game_data = random.sample(game_data, len(game_data))
 
 #Landing Page w/ Play Button
 
@@ -47,22 +50,25 @@ class AnswerForm(FlaskForm):
 
 @app.route("/trivia.html", methods=["GET","POST"])
 def trivia():
-    data = fetch_sql_db()
-    shuffled_data = random.sample(data, len(data))
+    print (game_data[0][0])
+    print (shuffled_game_data[0][1])
     form = AnswerForm()
-    prompt = (f"What is the Capital City of: {shuffled_data[0][0]}")
+    prompt = (f"What is the Capital City of: {shuffled_game_data[0][0]}")
     
     #Answer Check
     
     if form.is_submitted():
-        result = request.form.values()
-        for country in shuffled_data:
-            if result == shuffled_data[0][1]:
-                flash ("Correct!")
-                break
-            else:
-                flash ("Incorrect, Try Again!")
-                break
+        result = request.form
+        ans = list(result.items())
+        print(ans)
+        print(game_data[0][1])
+        
+        if shuffled_game_data[0][1] == ans[0][1]:
+            flash ("Correct!")
+    
+        else:
+            flash ("Incorrect, Try Again!")
+            
         
     return render_template("trivia.html", prompt = prompt, form=form)
 
