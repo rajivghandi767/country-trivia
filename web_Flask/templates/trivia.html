@@ -14,8 +14,9 @@
         </div>
         <form method="POST">
             <p>{{form.answer}}</p>
-            <p>{{form.check_answer}}</p>
-            <a href="trivia.html" > <button type="button">Keep Playing</button></a>
+            <p>{{form.check_answer}} 
+                <a href="trivia.html" > <button type="button">Keep Playing</button></a>
+            </p>
         </form>
         <div class=result>
             <p>{% for message in get_flashed_messages()%}
