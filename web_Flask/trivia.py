@@ -72,6 +72,17 @@ def trivia():
         
     return render_template("trivia.html", prompt = prompt, form=form)
 
+
+#Page Not Found
+@app.errorhandler(404)
+def page_no_found(e):
+    return render_template("404.html"), 404
+
+#Server Error
+@app.errorhandler(500)
+def page_no_found(e):
+    return render_template("500.html"), 500
+
 #Close DB
    
 @app.teardown_appcontext
