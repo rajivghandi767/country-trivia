@@ -50,6 +50,7 @@ class AnswerForm(FlaskForm):
 
 @app.route("/trivia.html", methods=["GET","POST"])
 def trivia():
+
     print (game_data[0][0])
     print (shuffled_game_data[0][1])
     form = AnswerForm()
