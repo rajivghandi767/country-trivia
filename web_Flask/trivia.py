@@ -76,9 +76,7 @@ def trivia():
         print(game_data[0][1])
 
         if shuffled_game_data[0][1] == ans[0][1]:
-            flash(
-                f"Correct! The capital city of {shuffled_game_data[0][0]} is {shuffled_game_data[0][1]}.")
-
+            flash(f"Correct! The capital city of {shuffled_game_data[0][0]} is {shuffled_game_data[0][1]}.")
         else:
             flash("Incorrect, Try Again!")
 
