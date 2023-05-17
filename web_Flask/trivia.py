@@ -25,8 +25,7 @@ def fetch_sql_db():
     with app.app_context():
         connection = getattr(g, '_database', None)
         try:
-            connection = g.database = sqlite3.connect(
-                "static/data/country_capitals.db")
+            connection = g.database = sqlite3.connect("static/data/country_capitals.db")
             print("Connection to DB Successful")
         except Error as e:
             print(f"Error: {e} has occured")
