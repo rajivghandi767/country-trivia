@@ -8,9 +8,12 @@ from wtforms import StringField, SubmitField
 from wtforms.validators import DataRequired
 from os import environ
 from Bard import Chatbot
+from dotenv import load_dotenv
+
+load_dotenv()
 
 app = Flask(__name__)
-app.secret_key = "WPJxVU!w8CW$0Vzty&CM"
+app.secret_key = environ.get("app-secretkey")
 
 # token = environ.get("BARD_TOKEN")
 # chatbot = Chatbot(token)
@@ -25,7 +28,8 @@ def fetch_sql_db():
     with app.app_context():
         connection = getattr(g, '_database', None)
         try:
-            connection = g.database = sqlite3.connect("static/data/country_capitals.db")
+            connection = g.database = sqlite3.connect(
+                "static/data/country_capitals.db")
             print("Connection to DB Successful")
         except Error as e:
             print(f"Error: {e} has occured")
@@ -75,7 +79,8 @@ def trivia():
         print(game_data[0][1])
 
         if shuffled_game_data[0][1] == ans[0][1]:
-            flash(f"Correct! The capital city of {shuffled_game_data[0][0]} is {shuffled_game_data[0][1]}.")
+            flash(
+                f"Correct! The capital city of {shuffled_game_data[0][0]} is {shuffled_game_data[0][1]}.")
         else:
             flash("Incorrect, Try Again!")
 
