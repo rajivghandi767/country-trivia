@@ -28,6 +28,7 @@ while True:
 
         if choice == "1":
             capital_answer = capital_prompt(new_game_pack)
+            used_game_cards.append(capital_answer)
             check_answer_for_capital(capital_answer, new_game_pack)
 
         elif choice == "2":

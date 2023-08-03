@@ -42,13 +42,15 @@ def country_prompt(shuffled_country_data):
 
 def check_answer_for_capital(prompt_answer, country_data):
     if prompt_answer == country_data[0][1]:
-        print("Correct!")
+        print("Correct!\n")
     else:
-        print("Incorrect!")
+        print(
+            f"\nIncorrect! The capital city of {country_data[0][0]} is {country_data[0][1]}.\n")
 
 
 def check_answer_for_country(prompt_answer, country_data):
     if prompt_answer == country_data[0][0]:
         print("Correct!")
     else:
-        print("Incorrect!")
+        print(
+            f"\nIncorrect! {country_data[0][1]} is the capital city of {country_data[0][0]}.\n")
