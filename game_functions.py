@@ -10,6 +10,10 @@ def shuffle_pack(country_data):
     return data
 
 
+def through_pack(pair):
+    pass
+
+
 def category():
     prompt = input(
         f"\nTo guess capitals, type '1'.\nTo guess countries, type '2'.\n")
@@ -22,7 +26,6 @@ def category():
         return "2"
     else:
         print("\nYou must type 1 or 2 to continue!")
-        return
 
 
 def capital_prompt(shuffled_country_data):

@@ -19,32 +19,19 @@ intro()
 
 while True:
 
-    game_pack = shuffle_pack(ccd)
-
     choice = category()
 
-    if choice == "1":
-        capital_answer = capital_prompt(game_pack)
-        check_answer_for_capital(capital_answer, game_pack)
+    while True:
 
-    elif choice == "2":
-        country_answer = country_prompt(game_pack)
-        check_answer_for_country(country_answer, game_pack)
+        new_game_pack = shuffle_pack(ccd)
+        used_game_cards = []
 
+        if choice == "1":
+            capital_answer = capital_prompt(new_game_pack)
+            check_answer_for_capital(capital_answer, new_game_pack)
 
-# while choice() == False:
-
-#     choice()
-#     break
-
-# else:
-#     while True:
-
-#         game_pack = shuffle_pack(ccd)
-
-#         if choice() == "1":
-#             capital_answer = capital_prompt(game_pack)
-#             check_answer_for_capital(capital_answer, game_pack)
-#         elif choice() == "2":
-#             country_answer = country_prompt(game_pack)
-#             check_answer_for_country(country_answer, game_pack)
+        elif choice == "2":
+            country_answer = country_prompt(new_game_pack)
+            check_answer_for_country(country_answer, new_game_pack)
+        else:
+            break
