@@ -6,6 +6,7 @@ from game_functions import *
 
 
 intro()
+exit_trivia()
 
 # game_pack = shuffle_pack(ccd)
 # capital_answer = capital_prompt(game_pack)
@@ -28,11 +29,18 @@ while True:
 
         if choice == "1":
             capital_answer = capital_prompt(new_game_pack)
-            used_game_cards.append(capital_answer)
-            check_answer_for_capital(capital_answer, new_game_pack)
+            if go_back(capital_answer):
+                break
+            else:
+                check_answer_for_capital(capital_answer, new_game_pack)
+                exit_trivia()
 
         elif choice == "2":
             country_answer = country_prompt(new_game_pack)
-            check_answer_for_country(country_answer, new_game_pack)
+            if go_back(capital_answer):
+                break
+            else:
+                check_answer_for_country(country_answer, new_game_pack)
+                exit_trivia()
         else:
             break

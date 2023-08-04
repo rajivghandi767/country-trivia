@@ -5,6 +5,15 @@ def intro():
     print(f"\nWelcome to Country Trivia!\nA Trivia Game designed and built by Rajiv Wallace.")
 
 
+def exit_trivia():
+    print("\nTo exit the game, press Ctrl^C.\nTo go back to Main Menu, type '0' and press 'Enter'.\n")
+
+
+def go_back(code):
+    if code == "0":
+        return code
+
+
 def shuffle_pack(country_data):
     data = random.sample(country_data, len(country_data))
     return data
@@ -16,10 +25,10 @@ def through_pack(pair):
 
 def category():
     prompt = input(
-        f"\nTo guess capitals, type '1'.\nTo guess countries, type '2'.\n")
+        f"Main Menu\n\nTo guess capitals, type '1'.\nTo guess countries, type '2'.\n")
 
     if prompt == "1":
-        print(f"\nLet's start guessing capitals!")
+        print(f"\nLet's start guessing capitals!\n")
         return "1"
     elif prompt == "2":
         print(f"\nLet's start guessing countries!")
@@ -42,10 +51,10 @@ def country_prompt(shuffled_country_data):
 
 def check_answer_for_capital(prompt_answer, country_data):
     if prompt_answer == country_data[0][1]:
-        print("Correct!\n")
+        print("Correct!")
     else:
         print(
-            f"\nIncorrect! The capital city of {country_data[0][0]} is {country_data[0][1]}.\n")
+            f"\nIncorrect! The capital city of {country_data[0][0]} is {country_data[0][1]}.")
 
 
 def check_answer_for_country(prompt_answer, country_data):
@@ -53,4 +62,4 @@ def check_answer_for_country(prompt_answer, country_data):
         print("Correct!")
     else:
         print(
-            f"\nIncorrect! {country_data[0][1]} is the capital city of {country_data[0][0]}.\n")
+            f"\nIncorrect! {country_data[0][1]} is the capital city of {country_data[0][0]}.")
