@@ -31,7 +31,7 @@ def category():
         print(f"\nLet's start guessing capitals!\n")
         return "1"
     elif prompt == "2":
-        print(f"\nLet's start guessing countries!")
+        print(f"\nLet's start guessing countries!\n")
         return "2"
     else:
         print("\nYou must type 1 or 2 to continue!")
@@ -54,7 +54,7 @@ def check_answer_for_capital(prompt_answer, country_data):
         print("Correct!")
     else:
         print(
-            f"\nIncorrect! The capital city of {country_data[0][0]} is {country_data[0][1]}.")
+            f"Incorrect! The capital city of {country_data[0][0]} is {country_data[0][1]}.")
 
 
 def check_answer_for_country(prompt_answer, country_data):
@@ -62,4 +62,4 @@ def check_answer_for_country(prompt_answer, country_data):
         print("Correct!")
     else:
         print(
-            f"\nIncorrect! {country_data[0][1]} is the capital city of {country_data[0][0]}.")
+            f"Incorrect! {country_data[0][1]} is the capital city of {country_data[0][0]}.")

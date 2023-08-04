@@ -37,7 +37,7 @@ while True:
 
         elif choice == "2":
             country_answer = country_prompt(new_game_pack)
-            if go_back(capital_answer):
+            if go_back(country_answer):
                 break
             else:
                 check_answer_for_country(country_answer, new_game_pack)
