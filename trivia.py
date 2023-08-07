@@ -1,8 +1,8 @@
 # Country Trivia Game by Rajiv Wallace
 
-from country_data import country_capital_data as ccd
-from player_data import *
-from game_functions import *
+from modules.country_data import country_capital_data as ccd
+from modules.player_data import *
+from modules.game_functions import *
 
 
 intro()
