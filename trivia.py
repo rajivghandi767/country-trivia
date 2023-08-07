@@ -8,16 +8,6 @@ from game_functions import *
 intro()
 exit_trivia()
 
-# game_pack = shuffle_pack(ccd)
-# capital_answer = capital_prompt(game_pack)
-# print(capital_answer)
-# print(game_pack[0][1])
-# check_answer_for_capital(capital_answer, game_pack)
-
-# test = choice()
-# print(test)
-# print(type(test))
-
 while True:
 
     choice = category()
