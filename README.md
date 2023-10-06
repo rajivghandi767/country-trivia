@@ -1,6 +1,6 @@
 # __Country Trivia__
 
-This is a trivia game for guessing country capitals and vice versa. . 
+This is a trivia game for guessing country capitals and vice versa.
 
 
 ## Tech Stack
